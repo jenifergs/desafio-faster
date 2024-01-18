@@ -1,0 +1,42 @@
+generator client {
+  provider      = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model drink_categories {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(255)
+  drinks drinks[]
+}
+
+model drinks {
+  id               Int              @id @default(autoincrement())
+  name             String           @db.VarChar(255)
+  price            Int
+  description      String           @db.VarChar(1000)
+  image            String           @db.VarChar(255)
+  category_id      Int
+  drink_categories drink_categories @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  liked_drinks     liked_drinks[]
+}
+
+model liked_drinks {
+  id       Int    @id @default(autoincrement())
+  user_id  Int
+  drink_id Int
+  drinks   drinks @relation(fields: [drink_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users    users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  email        String         @unique @db.VarChar(255)
+  password     String         @db.VarChar(255)
+  birthday     DateTime       @db.Date()
+  liked_drinks liked_drinks[]
+}
