@@ -1,0 +1,1619 @@
+{
+	"info": {
+		"_postman_id": "9ce7beee-c7d3-410b-8665-8482b59cff9c",
+		"name": "Faster Backend",
+		"description": "API faster para gerenciamento de drinks.\n\nEstá API Utiliza Autenticação com JWT para as coleções:\n\n- Bebidas\n- Categorias de Bebida\n- Usuarios -> Buscar Bebidas Favoritadas\n    \n\nUm fluxo de teste ideal para explorar todas as funcionalidades dessa api seria:  \n  \nHealthcheck -> Criar Usuario -> Logar Usuario -> Ver Bebidas Favoritadas -> Buscar Categorias de Bebidas -> Buscar bebidas naquela categoria -> Buscar bebidas por nome na categoria -> Favoritar bebida -> Ver bebidas favoritadas  \n  \nIsso garantiria que todas as funcionalidades fossem testadas corretamente.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30194613"
+	},
+	"item": [
+		{
+			"name": "Bebidas",
+			"item": [
+				{
+					"name": "Busca todos os drinks da plataforma",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks"
+							]
+						},
+						"description": "Este endpoint realiza uma solicitação HTTP GET para obter uma lista de bebidas do servidor. A solicitação não inclui um corpo de solicitação. A resposta terá um código de status 200 e conterá um array de objetos, cada um representando uma bebida. Cada objeto de bebida inclui propriedades como categoryId, categoryName, description, id, name, price, imageUrl e isLiked.EndFragment"
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "12206"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2fae-t9EA/tb918qLYllFCtbbhyi4zOI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:12:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um renomado vinho tinto da região de Bordeaux, na França conhecido por sua elegância, complexidade e longevidade. Geralmente, é feito principalmente com uvas Cabernet Sauvignon\",\n        \"id\": 1,\n        \"name\": \"Château Margaux\",\n        \"price\": 300,\n        \"imageUrl\": \"assets/Vinho-Chateau-Marguax.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Originário da região da Toscana, na Itália, Sassicaia é um vinho tinto icônico feito principalmente com uvas Cabernet Sauvignon. É conhecido por sua estrutura robusta, taninos firmes e notas de frutas escuras.\",\n        \"id\": 2,\n        \"name\": \"Sassicaia\",\n        \"price\": 250,\n        \"imageUrl\": \"assets/Vinho-Sassicaia.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Este é um vinho branco da Borgonha, França, produzido pela Domaine Leflaive. Montrachet é uma das denominações mais prestigiadas da região para vinhos brancos, geralmente feito com a uva Chardonnay. Espera-se que seja complexo, com notas de frutas brancas e acidez equilibrada.\",\n        \"id\": 3,\n        \"name\": \"Domaine Leflaive Montrachet\",\n        \"price\": 400,\n        \"imageUrl\": \"assets/Vinho-Domaines.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho branco da região de Bordeaux, Château Smith Haut Lafitte Blanc é conhecido por sua elegância e frescor. Geralmente feito com uma mistura de Sauvignon Blanc e Sémillon, apresenta notas cítricas, florais e minerais.\",\n        \"id\": 4,\n        \"name\": \"Château Smith Haut Lafitte Blanc\",\n        \"price\": 250,\n        \"imageUrl\": \"assets/Vinho-Smith-Haut-Laffite.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.\",\n        \"id\": 5,\n        \"name\": \"Château d'Esclans Garrus Rosé\",\n        \"price\": 300,\n        \"imageUrl\": \"assets/Vinho-Chateau-Garrus.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.\",\n        \"id\": 6,\n        \"name\": \"Porto Vintage\",\n        \"price\": 250,\n        \"imageUrl\": \"assets/Vinho-Porto-Vintage.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um estilo de vinho fortificado da região da Andaluzia, na Espanha. O Pedro Ximénez é um tipo de uva utilizada na produção de alguns Sherries, resultando em vinhos doces e intensos, com notas de passas, figos e especiarias.\",\n        \"id\": 7,\n        \"name\": \"Sherry Pedro Ximénez\",\n        \"price\": 200,\n        \"imageUrl\": \"assets/Vinho-Pedro-Ximenez.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho laranja da região da Friuli-Venezia Giulia, na Itália. Este vinho, produzido por Gravner, é fermentado em ânforas de barro, resultando em um vinho complexo, com taninos e sabores único\",\n        \"id\": 8,\n        \"name\": \"Gravner Anfora Ribolla Gialla\",\n        \"price\": 350,\n        \"imageUrl\": \"assets/Vinho-Gravner.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Outro vinho laranja da região de Friuli, Itália. Radikon Oslavje é produzido por Radikon e é conhecido por sua abordagem de vinificação natural e maceração prolongada, resultando em um vinho de cor laranja, com aromas intensos e uma estrutura robusta.\",\n        \"id\": 9,\n        \"name\": \"Radikon Oslavje\",\n        \"price\": 400,\n        \"imageUrl\": \"assets/Vinho-Radikon.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Vinho  tinto tropicais do Vale do São Francisco são, na sua maioria, jovens, frescos, aromáticos, frutados e florais.\",\n        \"id\": 10,\n        \"name\": \"Vinho Vale do São Francisco\",\n        \"price\": 75,\n        \"imageUrl\": \"assets/Vinho-Vale-Sao-Francisco.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja pilsen com sabor maltado e amargor moderado\",\n        \"id\": 11,\n        \"name\": \"Eisenbahn Pilsen\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/comum-wernesgruner.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja de trigo com mel, refrescante e suave\",\n        \"id\": 12,\n        \"name\": \"Colorado Appia\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/comum-colorado-appia.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja forte e amarga, com notas de frutas cítricas e pinho\",\n        \"id\": 13,\n        \"name\": \"Cerveja Colorado Indica\",\n        \"price\": 15,\n        \"imageUrl\": \"assets/comum-colorado-indica.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja pilsen com sabor suave e refrescante\",\n        \"id\": 14,\n        \"name\": \"Cerveja Petra Aurum\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/comum-cerveja-petra-aurum.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja de trigo com aroma de laranja e coentro\",\n        \"id\": 15,\n        \"name\": \"Cerveja Praya Witbier\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/comum-praya-witbier.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja do tipo lager com aroma mais suave e discreto\",\n        \"id\": 16,\n        \"name\": \"Brahma Chopp\",\n        \"price\": 8,\n        \"imageUrl\": \"assets/comum-brama-shoop.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja leve e refrescante\",\n        \"id\": 17,\n        \"name\": \"Cerveja Crystal\",\n        \"price\": 6,\n        \"imageUrl\": \"assets/comum-crystal.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja pilsen com sabor suave e refrescante\",\n        \"id\": 18,\n        \"name\": \"Cerveja Skol\",\n        \"price\": 6,\n        \"imageUrl\": \"assets/comum-Skol.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja pilsen com sabor maltado e amargor moderado\",\n        \"id\": 19,\n        \"name\": \"Cerveja Antarctica Original\",\n        \"price\": 8,\n        \"imageUrl\": \"assets/comum-Original.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 2,\n        \"categoryName\": \"Cervejas Industrializadas\",\n        \"description\": \"Uma cerveja Pilsen refrescante e amarga\",\n        \"id\": 20,\n        \"name\": \"Heineken\",\n        \"price\": 9,\n        \"imageUrl\": \"assets/comum-Heineken.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Westvleteren 12 é uma cerveja trapista belga escura e forte, com um sabor complexo e frutado. É considerada uma das melhores cervejas do mundo\",\n        \"id\": 21,\n        \"name\": \"Westvleteren 12\",\n        \"price\": 100,\n        \"imageUrl\": \"assets/artesanal-WestvleterenBrewery.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Heady Topper é uma cerveja americana do estilo New England IPA, com um sabor intenso e frutado. É considerada uma das melhores cervejas do mundo\",\n        \"id\": 22,\n        \"name\": \"Heady Topper\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/artesanal-TheAlchemist.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Stone IPA é uma cerveja americana do estilo American IPA, com um sabor forte e amargo. É uma das cervejas mais populares da Stone Brewing\",\n        \"id\": 23,\n        \"name\": \"Stone IPA\",\n        \"price\": 15,\n        \"imageUrl\": \"assets/artesanal-StoneBrewing.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co\",\n        \"id\": 24,\n        \"name\": \"Sierra Nevada Pale Ale\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/artesanal-SierraNevadaBrewingCo.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Pliny the Elder é uma cerveja americana do estilo Double IPA, com um sabor forte e amargo. É considerada uma das melhores cervejas do mundo\",\n        \"id\": 25,\n        \"name\": \"Pliny the Elder\",\n        \"price\": 25,\n        \"imageUrl\": \"assets/artesanal-RussianRiverBrewingCompany.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery\",\n        \"id\": 26,\n        \"name\": \"Dale’s Pale Ale\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/artesanal-OskarBluesBrewery.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Beer Geek Breakfast é uma cerveja dinamarquesa do estilo Imperial Stout, com um sabor forte e complexo. É uma das cervejas mais populares da Mikkeller\",\n        \"id\": 27,\n        \"name\": \"Beer Geek Breakfast\",\n        \"price\": 30,\n        \"imageUrl\": \"assets/artesanal-Mikkeller.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Kentucky Breakfast Stout é uma cerveja americana do estilo Imperial Stout, com um sabor forte e complexo. É uma das cervejas mais populares da Founders Brewing Co\",\n        \"id\": 28,\n        \"name\": \"Kentucky Breakfast Stout\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/artesanal-FoundersBrewingCo.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A 90 Minute IPA é uma cerveja americana do estilo Imperial IPA, com um sabor forte e amargo. É uma das cervejas mais populares da Dogfish Head Craft Brewery\",\n        \"id\": 29,\n        \"name\": \"90 Minute IPA\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/artesanal-DogfishHeadCraftBrewery.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Gueuze 100% Lambic Bio é uma cerveja belga do estilo Gueuze, com um sabor ácido e frutado. É uma das cervejas mais populares da Cantillon Brewery\",\n        \"id\": 30,\n        \"name\": \"Gueuze 100% Lambic Bio\",\n        \"price\": 50,\n        \"imageUrl\": \"assets/artesanal-CantillonBrewery.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão\",\n        \"id\": 31,\n        \"name\": \"Martini\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Cocktail-Martini.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Margarita é uma bebida mexicana feita com tequila, licor de laranja e suco de limão. É muitas vezes servida com uma borda de sal\",\n        \"id\": 32,\n        \"name\": \"Margarita\",\n        \"price\": 15,\n        \"imageUrl\": \"assets/Cocktail-marguerita.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Mojito é um coquetel cubano feito com rum, açúcar, suco de limão, água com gás e hortelã\",\n        \"id\": 33,\n        \"name\": \"Mojito\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/Cocktail-mojito.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Old Fashioned é um coquetel clássico feito com bourbon ou uísque, açúcar, angostura bitters e uma casca de laranja\",\n        \"id\": 34,\n        \"name\": \"Old Fashioned\",\n        \"price\": 25,\n        \"imageUrl\": \"assets/Cocktail-WhiskySour.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Negroni é um coquetel italiano feito com gin, vermute tinto e Campari. É geralmente guarnecido com uma fatia de laranja\",\n        \"id\": 35,\n        \"name\": \"Negroni\",\n        \"price\": 30,\n        \"imageUrl\": \"assets/Cocktail-Negroni.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Cosmopolitan é um coquetel americano feito com vodka, licor de laranja, suco de cranberry e suco de limão\",\n        \"id\": 36,\n        \"name\": \"Cosmopolitan\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Coktail-Cosmopolitano.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Piña Colada é uma bebida tropical feita com rum, leite de coco e suco de abacaxi\",\n        \"id\": 37,\n        \"name\": \"Piña Colada\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/Cocktail-PinaCollada.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"Um coquetel americano feito com vodka, suco de tomate, Tabasco, suco de limão, sal, molho Worcestershire, aipo e limão\",\n        \"id\": 38,\n        \"name\": \"Bloody Mary\",\n        \"price\": 25,\n        \"imageUrl\": \"assets/Coktail-BloodyMary.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Caipirinha é a bebida nacional do Brasil, feita com cachaça, açúcar e limã\",\n        \"id\": 39,\n        \"name\": \"Caipirinha\",\n        \"price\": 8,\n        \"imageUrl\": \"assets/Coktail-Caipirinha.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Daiquiri é um coquetel cubano feito com rum, suco de limão e xarope simples. É muitas vezes servido frozen\",\n        \"id\": 40,\n        \"name\": \"Daiquiri\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/Cocktail-Daiquiri.png\",\n        \"isLiked\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Busca todos os drinks com o nome especificado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks/search?name=Château",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Château"
+								}
+							]
+						},
+						"description": "Este endpoint realiza uma solicitação HTTP GET para buscar bebidas com base no parâmetro de nome fornecido. A solicitação deve ser enviada para [http://localhost:3000/drinks/search](http://localhost:3000/drinks/search) com o parâmetro de nome na string de consulta.\n\nA resposta a esta solicitação incluirá um array de objetos, onde cada objeto representa uma bebida. Cada objeto de bebida contém as seguintes propriedades:\n\n- categoryId: O ID da categoria à qual a bebida pertence.\n- categoryName: O nome da categoria à qual a bebida pertence.\n- description: Uma descrição da bebida.\n- id: O identificador único da bebida.\n- name: O nome da bebida.\n- price: O preço da bebida.\n- imageUrl: A URL da imagem da bebida.\n- isLiked: Um valor booleano indicando se a bebida é curtida.\n\nO status da última execução foi 200, indicando uma resposta bem-sucedida. Os exemplos de respostas fornecidos incluem detalhes de bebidas como Château Margaux, Château Smith Haut Lafitte Blanc e Château d'Esclans Garrus Rosé, juntamente com suas respectivas propriedades."
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks/search?name=Château",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Château"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46e-scmStFld1tJ5NTlD+PaDXFxcH3Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:16:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um renomado vinho tinto da região de Bordeaux, na França conhecido por sua elegância, complexidade e longevidade. Geralmente, é feito principalmente com uvas Cabernet Sauvignon\",\n        \"id\": 1,\n        \"name\": \"Château Margaux\",\n        \"price\": 300,\n        \"imageUrl\": \"assets/Vinho-Chateau-Marguax.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho branco da região de Bordeaux, Château Smith Haut Lafitte Blanc é conhecido por sua elegância e frescor. Geralmente feito com uma mistura de Sauvignon Blanc e Sémillon, apresenta notas cítricas, florais e minerais.\",\n        \"id\": 4,\n        \"name\": \"Château Smith Haut Lafitte Blanc\",\n        \"price\": 250,\n        \"imageUrl\": \"assets/Vinho-Smith-Haut-Laffite.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.\",\n        \"id\": 5,\n        \"name\": \"Château d'Esclans Garrus Rosé\",\n        \"price\": 300,\n        \"imageUrl\": \"assets/Vinho-Chateau-Garrus.png\",\n        \"isLiked\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Busca todos os drinks com o nome especificado em um categoria especifica",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks/categories/3/search?name=Pale",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks",
+								"categories",
+								"3",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Pale"
+								}
+							]
+						},
+						"description": "Esta solicitação HTTP GET recupera uma lista de bebidas da categoria \"Cervejas Artesanais\" com um ID de categoria específico e uma correspondência parcial com o nome da bebida. A solicitação inclui o ID da categoria no caminho do URL e a correspondência parcial do nome como um parâmetro de consulta. A resposta contém um array de objetos de bebida com detalhes como ID da categoria, nome da categoria, descrição, ID da bebida, nome, preço, URL da imagem e se a bebida é curtida.\n\nExemplo de Resposta:\n\n``` json\n[\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co\",\n        \"id\": 24,\n        \"name\": \"Sierra Nevada Pale Ale\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/artesanal-SierraNevadaBrewingCo.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery\",\n        \"id\": 26,\n        \"name\": \"Dale’s Pale Ale\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/artesanal-OskarBluesBrewery.png\",\n        \"isLiked\": false\n    }\n]\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks/categories/3/search?name=Pale",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks",
+										"categories",
+										"3",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Pale"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "721"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d1-0xZR3FJtr15wJgwWbEJ/O0gZNPc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:19:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co\",\n        \"id\": 24,\n        \"name\": \"Sierra Nevada Pale Ale\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/artesanal-SierraNevadaBrewingCo.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery\",\n        \"id\": 26,\n        \"name\": \"Dale’s Pale Ale\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/artesanal-OskarBluesBrewery.png\",\n        \"isLiked\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Busca todos os drinks em um categoria especifica",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks",
+								"categories",
+								"1"
+							]
+						},
+						"description": "# Obter Categoria de Bebida por ID\n\nEste ponto de extremidade realiza uma solicitação HTTP GET para recuperar os detalhes de uma categoria específica de bebida com base no ID da categoria fornecido.\n\n## Solicitação\n\n- Método: GET\n- URL: `http://localhost:3000/drinks/categories/1`\n    \n\n## Resposta\n\n- Status: 200 OK\n- Corpo:\n    \n\n``` json\n[\n  {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão\",\n        \"id\": 31,\n        \"name\": \"Martini\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Cocktail-Martini.png\",\n        \"isLiked\": false\n    }\n]\n\n ```\n\nEste exemplo de resposta parece indicar que houve uma resposta bem-sucedida, mas os detalhes específicos da categoria, como nome, descrição, preço e URL da imagem, não foram preenchidos ou estão com valores padrão. Certifique-se de que o servidor forneça informações detalhadas sobre a categoria com base no ID fornecido."
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks",
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2716"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a9c-B5rxu00fEAbanpHFarnnEQ4joKg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:22:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão\",\n        \"id\": 31,\n        \"name\": \"Martini\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Cocktail-Martini.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Margarita é uma bebida mexicana feita com tequila, licor de laranja e suco de limão. É muitas vezes servida com uma borda de sal\",\n        \"id\": 32,\n        \"name\": \"Margarita\",\n        \"price\": 15,\n        \"imageUrl\": \"assets/Cocktail-marguerita.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Mojito é um coquetel cubano feito com rum, açúcar, suco de limão, água com gás e hortelã\",\n        \"id\": 33,\n        \"name\": \"Mojito\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/Cocktail-mojito.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Old Fashioned é um coquetel clássico feito com bourbon ou uísque, açúcar, angostura bitters e uma casca de laranja\",\n        \"id\": 34,\n        \"name\": \"Old Fashioned\",\n        \"price\": 25,\n        \"imageUrl\": \"assets/Cocktail-WhiskySour.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Negroni é um coquetel italiano feito com gin, vermute tinto e Campari. É geralmente guarnecido com uma fatia de laranja\",\n        \"id\": 35,\n        \"name\": \"Negroni\",\n        \"price\": 30,\n        \"imageUrl\": \"assets/Cocktail-Negroni.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Cosmopolitan é um coquetel americano feito com vodka, licor de laranja, suco de cranberry e suco de limão\",\n        \"id\": 36,\n        \"name\": \"Cosmopolitan\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Coktail-Cosmopolitano.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Piña Colada é uma bebida tropical feita com rum, leite de coco e suco de abacaxi\",\n        \"id\": 37,\n        \"name\": \"Piña Colada\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/Cocktail-PinaCollada.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"Um coquetel americano feito com vodka, suco de tomate, Tabasco, suco de limão, sal, molho Worcestershire, aipo e limão\",\n        \"id\": 38,\n        \"name\": \"Bloody Mary\",\n        \"price\": 25,\n        \"imageUrl\": \"assets/Coktail-BloodyMary.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"A Caipirinha é a bebida nacional do Brasil, feita com cachaça, açúcar e limã\",\n        \"id\": 39,\n        \"name\": \"Caipirinha\",\n        \"price\": 8,\n        \"imageUrl\": \"assets/Coktail-Caipirinha.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Daiquiri é um coquetel cubano feito com rum, suco de limão e xarope simples. É muitas vezes servido frozen\",\n        \"id\": 40,\n        \"name\": \"Daiquiri\",\n        \"price\": 18,\n        \"imageUrl\": \"assets/Cocktail-Daiquiri.png\",\n        \"isLiked\": false\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Favoritar Drinks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks/6/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks",
+								"6",
+								"like"
+							]
+						},
+						"description": "Está rota é usada para favoritar/desfavoritar um drink, funciona de maneira 'toggle' dessa forma quando não esta favoritado ele passa a ser favoritado, e o contrario quando está favoritado"
+					},
+					"response": [
+						{
+							"name": "Favorita Drink 5",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks/5/like",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks",
+										"5",
+										"like"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:27:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Favorita Drink 6",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks/6/like",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks",
+										"6",
+										"like"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:27:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "Coleção forneçe rotas para busca de bebidas utilizando diversos filtros, além de fornecer rotas para favoritar/desfavoritar um drink"
+		},
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jhondoe_novo@gmail.com\",\r\n    \"password\": \"1234aRaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "## Auth Login\n\nEste endpoint é usado para autenticar um usuário, fornecendo seu email e senha.\n\n### Request Body\n\n- `email` (string, obrigatorio)\n    \n- `password` (string, required)\n    \n\n### Response\n\n- `token` (string): Um token JWT para o usuário autenticado.\n    \n- `error` (string): Se a solicitação falhar, uma mensagem de erro será fornecida.\n    \n\n#### Example Response\n\n``` json\n{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"error\": \"\"\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"jhondoe_novo@gmail.com\",\r\n    \"password\": \"1234aRaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "245"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f5-Y1sNkQjMmQDLkES0uvVGTGoVKjU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:56:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTcwMDh9.Mh9UNzFVqk5WTG7ymmkSAHs1VVM5G2yfFYlGQIG-mNs\"\n}"
+						},
+						{
+							"name": "Senha Errada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"jhondoe_novo@gmail.com\",\r\n    \"password\": \"1234aaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a-7GHLk3sEqhb7bdUzDAkTbp8LZZ8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:57:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Wrong password\"\n}"
+						},
+						{
+							"name": "Validação Campo Invalido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"a\",\r\n    \"password\": \"1234aRaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-rWMmBHQ4KBXTeyxBoWA+o0HbBhE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:59:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\"error\":\"The property \\\"email\\\" is not in the correct format (expected: /^[\\\\w-.]+@([\\\\w-]+\\\\.)+[\\\\w-]{2,4}$/)\"}"
+						},
+						{
+							"name": "Validação Campo Não Informado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"1234aRaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-rWMmBHQ4KBXTeyxBoWA+o0HbBhE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:59:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"The property \\\"email\\\" is required\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Coleção forneçe rotas para autenticação do usuario"
+		},
+		{
+			"name": "Healthcheck",
+			"item": [
+				{
+					"name": "Healtcheck - Padrão",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						},
+						"description": "Este endpoint faz uma solicitação HTTP GET para [http://localhost:3000/](http://localhost:3000/). Não requer nenhum corpo de solicitação\n\n### Resposta\n\n- Status: 200\n- Body:\n    \n    ``` json\n        {\n            \"status\": \"\",\n            \"alive\": true,\n            \"uptime\": 0\n        }\n    \n     ```"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-KjppXsl+3GYTAcwFIakbOxi7/q4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:01:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"alive\": true,\n    \"uptime\": 7.643188919\n}"
+						}
+					]
+				},
+				{
+					"name": "Healtcheck - Ping -> Pong",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/ping",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"ping"
+							]
+						},
+						"description": "# Ping Endpoint\n\nEste endpoint envia uma solicitação HTTP GET para [http://localhost:3000/ping](http://localhost:3000/ping) para verificar o status do servidor.\n\n### Response\n\npong html indicando que o servidor esta ativo"
+					},
+					"response": [
+						{
+							"name": "Pong",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/ping",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ping"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-DlFKBmK8tp3IY5U9HOJuPUDoGoc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:03:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "pong"
+						}
+					]
+				},
+				{
+					"name": "Is Alive",
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						},
+						"description": "Verifica se Api esta ativa usando um verbo HEAD\n\nO que permite uma chamada http rapida apenas para verificar se a api esta ativa"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "HEAD",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-ppKRHiFHLzY/vaHJ27lpgZB1PME\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:06:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "Essa coleção se destina a exportar rotas que verifciam se a aplicação está de pé"
+		},
+		{
+			"name": "Categoria de Bebidas",
+			"item": [
+				{
+					"name": "Lista Categorias de Drinks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/drinks-categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"drinks-categories"
+							]
+						},
+						"description": "## Obter Categorias de Bebidas\n\n---\n\n  \nEste ponto de extremidade obtém uma lista de categorias de bebidas. A solicitação deve ser feita como um GET HTTP para [http://localhost:3000/drinks/categories](http://localhost:3000/drinks/categories).\n\n## Resposta:\n\n---\n\n  \nAo obter com sucesso a lista de categorias de bebidas, o servidor responde com um código de status 200 e um array JSON contendo as informações das categorias:\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"name\": \"Coquetéis\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Cervejas Industrializadas\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Cervejas Artesanais\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Vinhos\"\n    }\n]\n\n ```\n\nCada objeto na lista possui um id único e o nome da categoria.\n\nEm caso de erro, o servidor responderá com um código de status de erro apropriado, juntamente com uma mensagem de erro."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/drinks-categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"drinks-categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-KKwQn1WSCuTqI6rvNfEsZ4avBes\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:09:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Coquetéis\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Cervejas Industrializadas\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Cervejas Artesanais\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Vinhos\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Coleção forneçe rota para buscar a lista de categorias de bebidas"
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Cria usuarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jhon Doe\",\r\n    \"password\": \"1234aRaa\",\r\n    \"email\": \"jhondoe_novo@gmail.com\",\r\n    \"birthday\": \"2000-11-29\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Este endpoint o cliente crie um novo usuário. A solicitação deve ser enviada como um POST HTTP para [http://localhost:3000/users](http://localhost:3000/users) com as informações necessárias do usuário no corpo da solicitação.\n\nCorpo da Solicitação:\n\n- name (string, obrigatório): O nome do usuário.\n    \n- password (string, obrigatório): A senha para a conta do usuário.\n    \n- email (string, obrigatório): O endereço de e-mail do usuário.\n    \n- birthday (string, obrigatório): A data de nascimento do usuário.\n    \n\nResposta:  \n  \n  \nApós a criação bem-sucedida do usuário, o servidor responde com um código de status 201 e um objeto JSON contendo as informações do usuário recém-criado:\n\n``` json\n{\n    \"user\": {\n        \"email\": \"jhondoe_novo@gmail.com\",\n        \"id\": 9\n    }\n}\n\n ```\n\nO id é o identificador único para o usuário, e o email é o endereço de e-mail associado à conta do usuário.  \nEm caso de erro, o servidor responderá com um código de status de erro apropriado, juntamente com uma mensagem de erro."
+					},
+					"response": [
+						{
+							"name": "Usuario já existe",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Jhon Doe\",\r\n    \"email\": \"jheondoe@gmail.com\",\r\n    \"password\": \"1234aRaa\",\r\n    \"birthday\": \"1950-11-29\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-iGErLku/9taeeOQN+9qwFgLXnuo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:40:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User already exists\"\n}"
+						},
+						{
+							"name": "Validação de Campo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Jhon Doe\",\r\n    \"email\": \"@gmail.com\",\r\n    \"password\": \"1234aRaa\",\r\n    \"birthday\": \"2000-11-29\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"71-1t3DRiNFol4gEFjAKIjhqtWu4j0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:40:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"The property \\\"email\\\" is not in the correct format (expected: /^[\\\\w-.]+@([\\\\w-]+\\\\.)+[\\\\w-]{2,4}$/)\"\n}"
+						},
+						{
+							"name": "Validação de Campo Ausente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Jheon Doe\",\r\n    \"password\": \"1234aRaa\",\r\n    \"birthday\": \"2000-11-29\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-rWMmBHQ4KBXTeyxBoWA+o0HbBhE\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:45:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"The property \\\"email\\\" is required\"\n}"
+						},
+						{
+							"name": "Criação Com Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Jhon Doe\",\r\n    \"password\": \"1234aRaa\",\r\n    \"email\": \"jhondoe_novo@gmail.com\",\r\n    \"birthday\": \"2000-11-29\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-WeJNCciKvtQD0i1qwsn7Vc6Qesw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 14:47:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"email\": \"jhondoe_novo@gmail.com\",\n        \"id\": 9\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Bebidas Favoritadas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTc1NzB9._gelpUao75-zViPQefzNFMhbVT2-flzQDDvUoXfW3jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/liked-drinks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"liked-drinks"
+							]
+						},
+						"description": "Este ponto de extremidade realiza uma solicitação HTTP GET para recuperar uma lista de bebidas curtidas pelo usuário. A resposta incluirá um array de objetos, onde cada objeto representa uma bebida curtida, com detalhes como ID da categoria, nome da categoria, descrição, ID, URL da imagem, nome, preço e um sinal booleano indicando se a bebida é curtida ou não.\n\nExemplo de resposta:\n\n``` json\n[\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.\",\n        \"id\": 5,\n        \"imageUrl\": \"assets/Vinho-Chateau-Garrus.png\",\n        \"name\": \"Château d'Esclans Garrus Rosé\",\n        \"price\": 300,\n        \"isLiked\": true\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.\",\n        \"id\": 6,\n        \"imageUrl\": \"assets/Vinho-Porto-Vintage.png\",\n        \"name\": \"Porto Vintage\",\n        \"price\": 250,\n        \"isLiked\": true\n    }\n]\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Sem Itens",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/liked-drinks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"liked-drinks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:07:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						},
+						{
+							"name": "Com Itens",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/liked-drinks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"liked-drinks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "736"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e0-48P0Fmo25Sb6LZ11KIO6tHaFR2g\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Jan 2024 15:31:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.\",\n        \"id\": 5,\n        \"imageUrl\": \"assets/Vinho-Chateau-Garrus.png\",\n        \"name\": \"Château d'Esclans Garrus Rosé\",\n        \"price\": 300,\n        \"isLiked\": true\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.\",\n        \"id\": 6,\n        \"imageUrl\": \"assets/Vinho-Porto-Vintage.png\",\n        \"name\": \"Porto Vintage\",\n        \"price\": 250,\n        \"isLiked\": true\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Esta coleção contém as requisições relacionadas ao usuario da aplicação."
+		}
+	]
+}

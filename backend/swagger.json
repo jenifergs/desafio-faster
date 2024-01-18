@@ -1,0 +1,1873 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Faster Backend",
+    "description": "API faster para gerenciamento de drinks.\n\nEstá API Utiliza Autenticação com JWT para as coleções:\n\n- Bebidas\n- Categorias de Bebida\n- Usuarios -> Buscar Bebidas Favoritadas\n    \n\nUm fluxo de teste ideal para explorar todas as funcionalidades dessa api seria:  \n  \nHealthcheck -> Criar Usuario -> Logar Usuario -> Ver Bebidas Favoritadas -> Buscar Categorias de Bebidas -> Buscar bebidas naquela categoria -> Buscar bebidas por nome na categoria -> Favoritar bebida -> Ver bebidas favoritadas  \n  \nIsso garantiria que todas as funcionalidades fossem testadas corretamente.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Bebidas",
+      "description": "Coleção forneçe rotas para busca de bebidas utilizando diversos filtros, além de fornecer rotas para favoritar/desfavoritar um drink"
+    },
+    {
+      "name": "Autenticação",
+      "description": "Coleção forneçe rotas para autenticação do usuario"
+    },
+    {
+      "name": "Healthcheck",
+      "description": "Essa coleção se destina a exportar rotas que verifciam se a aplicação está de pé"
+    },
+    {
+      "name": "Categoria de Bebidas",
+      "description": "Coleção forneçe rota para buscar a lista de categorias de bebidas"
+    },
+    {
+      "name": "Usuarios",
+      "description": "Esta coleção contém as requisições relacionadas ao usuario da aplicação."
+    }
+  ],
+  "paths": {
+    "/drinks": {
+      "get": {
+        "tags": [
+          "Bebidas"
+        ],
+        "summary": "Busca todos os drinks da plataforma",
+        "description": "Este endpoint realiza uma solicitação HTTP GET para obter uma lista de bebidas do servidor. A solicitação não inclui um corpo de solicitação. A resposta terá um código de status 200 e conterá um array de objetos, cada um representando uma bebida. Cada objeto de bebida inclui propriedades como categoryId, categoryName, description, id, name, price, imageUrl e isLiked.EndFragment",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "12206"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"2fae-t9EA/tb918qLYllFCtbbhyi4zOI\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:12:25 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um renomado vinho tinto da região de Bordeaux, na França conhecido por sua elegância, complexidade e longevidade. Geralmente, é feito principalmente com uvas Cabernet Sauvignon",
+                    "id": 1,
+                    "name": "Château Margaux",
+                    "price": 300,
+                    "imageUrl": "assets/Vinho-Chateau-Marguax.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Originário da região da Toscana, na Itália, Sassicaia é um vinho tinto icônico feito principalmente com uvas Cabernet Sauvignon. É conhecido por sua estrutura robusta, taninos firmes e notas de frutas escuras.",
+                    "id": 2,
+                    "name": "Sassicaia",
+                    "price": 250,
+                    "imageUrl": "assets/Vinho-Sassicaia.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Este é um vinho branco da Borgonha, França, produzido pela Domaine Leflaive. Montrachet é uma das denominações mais prestigiadas da região para vinhos brancos, geralmente feito com a uva Chardonnay. Espera-se que seja complexo, com notas de frutas brancas e acidez equilibrada.",
+                    "id": 3,
+                    "name": "Domaine Leflaive Montrachet",
+                    "price": 400,
+                    "imageUrl": "assets/Vinho-Domaines.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um vinho branco da região de Bordeaux, Château Smith Haut Lafitte Blanc é conhecido por sua elegância e frescor. Geralmente feito com uma mistura de Sauvignon Blanc e Sémillon, apresenta notas cítricas, florais e minerais.",
+                    "id": 4,
+                    "name": "Château Smith Haut Lafitte Blanc",
+                    "price": 250,
+                    "imageUrl": "assets/Vinho-Smith-Haut-Laffite.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.",
+                    "id": 5,
+                    "name": "Château d'Esclans Garrus Rosé",
+                    "price": 300,
+                    "imageUrl": "assets/Vinho-Chateau-Garrus.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.",
+                    "id": 6,
+                    "name": "Porto Vintage",
+                    "price": 250,
+                    "imageUrl": "assets/Vinho-Porto-Vintage.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um estilo de vinho fortificado da região da Andaluzia, na Espanha. O Pedro Ximénez é um tipo de uva utilizada na produção de alguns Sherries, resultando em vinhos doces e intensos, com notas de passas, figos e especiarias.",
+                    "id": 7,
+                    "name": "Sherry Pedro Ximénez",
+                    "price": 200,
+                    "imageUrl": "assets/Vinho-Pedro-Ximenez.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um vinho laranja da região da Friuli-Venezia Giulia, na Itália. Este vinho, produzido por Gravner, é fermentado em ânforas de barro, resultando em um vinho complexo, com taninos e sabores único",
+                    "id": 8,
+                    "name": "Gravner Anfora Ribolla Gialla",
+                    "price": 350,
+                    "imageUrl": "assets/Vinho-Gravner.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Outro vinho laranja da região de Friuli, Itália. Radikon Oslavje é produzido por Radikon e é conhecido por sua abordagem de vinificação natural e maceração prolongada, resultando em um vinho de cor laranja, com aromas intensos e uma estrutura robusta.",
+                    "id": 9,
+                    "name": "Radikon Oslavje",
+                    "price": 400,
+                    "imageUrl": "assets/Vinho-Radikon.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Vinho  tinto tropicais do Vale do São Francisco são, na sua maioria, jovens, frescos, aromáticos, frutados e florais.",
+                    "id": 10,
+                    "name": "Vinho Vale do São Francisco",
+                    "price": 75,
+                    "imageUrl": "assets/Vinho-Vale-Sao-Francisco.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja pilsen com sabor maltado e amargor moderado",
+                    "id": 11,
+                    "name": "Eisenbahn Pilsen",
+                    "price": 10,
+                    "imageUrl": "assets/comum-wernesgruner.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja de trigo com mel, refrescante e suave",
+                    "id": 12,
+                    "name": "Colorado Appia",
+                    "price": 12,
+                    "imageUrl": "assets/comum-colorado-appia.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja forte e amarga, com notas de frutas cítricas e pinho",
+                    "id": 13,
+                    "name": "Cerveja Colorado Indica",
+                    "price": 15,
+                    "imageUrl": "assets/comum-colorado-indica.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja pilsen com sabor suave e refrescante",
+                    "id": 14,
+                    "name": "Cerveja Petra Aurum",
+                    "price": 10,
+                    "imageUrl": "assets/comum-cerveja-petra-aurum.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja de trigo com aroma de laranja e coentro",
+                    "id": 15,
+                    "name": "Cerveja Praya Witbier",
+                    "price": 12,
+                    "imageUrl": "assets/comum-praya-witbier.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja do tipo lager com aroma mais suave e discreto",
+                    "id": 16,
+                    "name": "Brahma Chopp",
+                    "price": 8,
+                    "imageUrl": "assets/comum-brama-shoop.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja leve e refrescante",
+                    "id": 17,
+                    "name": "Cerveja Crystal",
+                    "price": 6,
+                    "imageUrl": "assets/comum-crystal.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja pilsen com sabor suave e refrescante",
+                    "id": 18,
+                    "name": "Cerveja Skol",
+                    "price": 6,
+                    "imageUrl": "assets/comum-Skol.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja pilsen com sabor maltado e amargor moderado",
+                    "id": 19,
+                    "name": "Cerveja Antarctica Original",
+                    "price": 8,
+                    "imageUrl": "assets/comum-Original.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 2,
+                    "categoryName": "Cervejas Industrializadas",
+                    "description": "Uma cerveja Pilsen refrescante e amarga",
+                    "id": 20,
+                    "name": "Heineken",
+                    "price": 9,
+                    "imageUrl": "assets/comum-Heineken.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Westvleteren 12 é uma cerveja trapista belga escura e forte, com um sabor complexo e frutado. É considerada uma das melhores cervejas do mundo",
+                    "id": 21,
+                    "name": "Westvleteren 12",
+                    "price": 100,
+                    "imageUrl": "assets/artesanal-WestvleterenBrewery.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Heady Topper é uma cerveja americana do estilo New England IPA, com um sabor intenso e frutado. É considerada uma das melhores cervejas do mundo",
+                    "id": 22,
+                    "name": "Heady Topper",
+                    "price": 20,
+                    "imageUrl": "assets/artesanal-TheAlchemist.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Stone IPA é uma cerveja americana do estilo American IPA, com um sabor forte e amargo. É uma das cervejas mais populares da Stone Brewing",
+                    "id": 23,
+                    "name": "Stone IPA",
+                    "price": 15,
+                    "imageUrl": "assets/artesanal-StoneBrewing.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co",
+                    "id": 24,
+                    "name": "Sierra Nevada Pale Ale",
+                    "price": 10,
+                    "imageUrl": "assets/artesanal-SierraNevadaBrewingCo.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Pliny the Elder é uma cerveja americana do estilo Double IPA, com um sabor forte e amargo. É considerada uma das melhores cervejas do mundo",
+                    "id": 25,
+                    "name": "Pliny the Elder",
+                    "price": 25,
+                    "imageUrl": "assets/artesanal-RussianRiverBrewingCompany.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery",
+                    "id": 26,
+                    "name": "Dale’s Pale Ale",
+                    "price": 12,
+                    "imageUrl": "assets/artesanal-OskarBluesBrewery.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Beer Geek Breakfast é uma cerveja dinamarquesa do estilo Imperial Stout, com um sabor forte e complexo. É uma das cervejas mais populares da Mikkeller",
+                    "id": 27,
+                    "name": "Beer Geek Breakfast",
+                    "price": 30,
+                    "imageUrl": "assets/artesanal-Mikkeller.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Kentucky Breakfast Stout é uma cerveja americana do estilo Imperial Stout, com um sabor forte e complexo. É uma das cervejas mais populares da Founders Brewing Co",
+                    "id": 28,
+                    "name": "Kentucky Breakfast Stout",
+                    "price": 18,
+                    "imageUrl": "assets/artesanal-FoundersBrewingCo.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A 90 Minute IPA é uma cerveja americana do estilo Imperial IPA, com um sabor forte e amargo. É uma das cervejas mais populares da Dogfish Head Craft Brewery",
+                    "id": 29,
+                    "name": "90 Minute IPA",
+                    "price": 18,
+                    "imageUrl": "assets/artesanal-DogfishHeadCraftBrewery.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Gueuze 100% Lambic Bio é uma cerveja belga do estilo Gueuze, com um sabor ácido e frutado. É uma das cervejas mais populares da Cantillon Brewery",
+                    "id": 30,
+                    "name": "Gueuze 100% Lambic Bio",
+                    "price": 50,
+                    "imageUrl": "assets/artesanal-CantillonBrewery.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão",
+                    "id": 31,
+                    "name": "Martini",
+                    "price": 20,
+                    "imageUrl": "assets/Cocktail-Martini.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Margarita é uma bebida mexicana feita com tequila, licor de laranja e suco de limão. É muitas vezes servida com uma borda de sal",
+                    "id": 32,
+                    "name": "Margarita",
+                    "price": 15,
+                    "imageUrl": "assets/Cocktail-marguerita.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Mojito é um coquetel cubano feito com rum, açúcar, suco de limão, água com gás e hortelã",
+                    "id": 33,
+                    "name": "Mojito",
+                    "price": 12,
+                    "imageUrl": "assets/Cocktail-mojito.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Old Fashioned é um coquetel clássico feito com bourbon ou uísque, açúcar, angostura bitters e uma casca de laranja",
+                    "id": 34,
+                    "name": "Old Fashioned",
+                    "price": 25,
+                    "imageUrl": "assets/Cocktail-WhiskySour.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Negroni é um coquetel italiano feito com gin, vermute tinto e Campari. É geralmente guarnecido com uma fatia de laranja",
+                    "id": 35,
+                    "name": "Negroni",
+                    "price": 30,
+                    "imageUrl": "assets/Cocktail-Negroni.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Cosmopolitan é um coquetel americano feito com vodka, licor de laranja, suco de cranberry e suco de limão",
+                    "id": 36,
+                    "name": "Cosmopolitan",
+                    "price": 20,
+                    "imageUrl": "assets/Coktail-Cosmopolitano.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Piña Colada é uma bebida tropical feita com rum, leite de coco e suco de abacaxi",
+                    "id": 37,
+                    "name": "Piña Colada",
+                    "price": 18,
+                    "imageUrl": "assets/Cocktail-PinaCollada.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "Um coquetel americano feito com vodka, suco de tomate, Tabasco, suco de limão, sal, molho Worcestershire, aipo e limão",
+                    "id": 38,
+                    "name": "Bloody Mary",
+                    "price": 25,
+                    "imageUrl": "assets/Coktail-BloodyMary.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Caipirinha é a bebida nacional do Brasil, feita com cachaça, açúcar e limã",
+                    "id": 39,
+                    "name": "Caipirinha",
+                    "price": 8,
+                    "imageUrl": "assets/Coktail-Caipirinha.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Daiquiri é um coquetel cubano feito com rum, suco de limão e xarope simples. É muitas vezes servido frozen",
+                    "id": 40,
+                    "name": "Daiquiri",
+                    "price": 18,
+                    "imageUrl": "assets/Cocktail-Daiquiri.png",
+                    "isLiked": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drinks/search": {
+      "get": {
+        "tags": [
+          "Bebidas"
+        ],
+        "summary": "Busca todos os drinks com o nome especificado",
+        "description": "Este endpoint realiza uma solicitação HTTP GET para buscar bebidas com base no parâmetro de nome fornecido. A solicitação deve ser enviada para [http://localhost:3000/drinks/search](http://localhost:3000/drinks/search) com o parâmetro de nome na string de consulta.\n\nA resposta a esta solicitação incluirá um array de objetos, onde cada objeto representa uma bebida. Cada objeto de bebida contém as seguintes propriedades:\n\n- categoryId: O ID da categoria à qual a bebida pertence.\n- categoryName: O nome da categoria à qual a bebida pertence.\n- description: Uma descrição da bebida.\n- id: O identificador único da bebida.\n- name: O nome da bebida.\n- price: O preço da bebida.\n- imageUrl: A URL da imagem da bebida.\n- isLiked: Um valor booleano indicando se a bebida é curtida.\n\nO status da última execução foi 200, indicando uma resposta bem-sucedida. Os exemplos de respostas fornecidos incluem detalhes de bebidas como Château Margaux, Château Smith Haut Lafitte Blanc e Château d'Esclans Garrus Rosé, juntamente com suas respectivas propriedades.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Château"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "1134"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"46e-scmStFld1tJ5NTlD+PaDXFxcH3Q\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:16:30 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um renomado vinho tinto da região de Bordeaux, na França conhecido por sua elegância, complexidade e longevidade. Geralmente, é feito principalmente com uvas Cabernet Sauvignon",
+                    "id": 1,
+                    "name": "Château Margaux",
+                    "price": 300,
+                    "imageUrl": "assets/Vinho-Chateau-Marguax.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Um vinho branco da região de Bordeaux, Château Smith Haut Lafitte Blanc é conhecido por sua elegância e frescor. Geralmente feito com uma mistura de Sauvignon Blanc e Sémillon, apresenta notas cítricas, florais e minerais.",
+                    "id": 4,
+                    "name": "Château Smith Haut Lafitte Blanc",
+                    "price": 250,
+                    "imageUrl": "assets/Vinho-Smith-Haut-Laffite.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 4,
+                    "categoryName": "Vinhos",
+                    "description": "Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.",
+                    "id": 5,
+                    "name": "Château d'Esclans Garrus Rosé",
+                    "price": 300,
+                    "imageUrl": "assets/Vinho-Chateau-Garrus.png",
+                    "isLiked": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drinks/categories/3/search": {
+      "get": {
+        "tags": [
+          "Bebidas"
+        ],
+        "summary": "Busca todos os drinks com o nome especificado em um categoria especifica",
+        "description": "Esta solicitação HTTP GET recupera uma lista de bebidas da categoria \"Cervejas Artesanais\" com um ID de categoria específico e uma correspondência parcial com o nome da bebida. A solicitação inclui o ID da categoria no caminho do URL e a correspondência parcial do nome como um parâmetro de consulta. A resposta contém um array de objetos de bebida com detalhes como ID da categoria, nome da categoria, descrição, ID da bebida, nome, preço, URL da imagem e se a bebida é curtida.\n\nExemplo de Resposta:\n\n``` json\n[\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co\",\n        \"id\": 24,\n        \"name\": \"Sierra Nevada Pale Ale\",\n        \"price\": 10,\n        \"imageUrl\": \"assets/artesanal-SierraNevadaBrewingCo.png\",\n        \"isLiked\": false\n    },\n    {\n        \"categoryId\": 3,\n        \"categoryName\": \"Cervejas Artesanais\",\n        \"description\": \"A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery\",\n        \"id\": 26,\n        \"name\": \"Dale’s Pale Ale\",\n        \"price\": 12,\n        \"imageUrl\": \"assets/artesanal-OskarBluesBrewery.png\",\n        \"isLiked\": false\n    }\n]\n\n ```",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Pale"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "721"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"2d1-0xZR3FJtr15wJgwWbEJ/O0gZNPc\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:19:58 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Sierra Nevada Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor equilibrado e refrescante. É uma das cervejas mais populares da Sierra Nevada Brewing Co",
+                    "id": 24,
+                    "name": "Sierra Nevada Pale Ale",
+                    "price": 10,
+                    "imageUrl": "assets/artesanal-SierraNevadaBrewingCo.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 3,
+                    "categoryName": "Cervejas Artesanais",
+                    "description": "A Dale’s Pale Ale é uma cerveja americana do estilo American Pale Ale, com um sabor forte e amargo. É uma das cervejas mais populares da Oskar Blues Brewery",
+                    "id": 26,
+                    "name": "Dale’s Pale Ale",
+                    "price": 12,
+                    "imageUrl": "assets/artesanal-OskarBluesBrewery.png",
+                    "isLiked": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drinks/categories/1": {
+      "get": {
+        "tags": [
+          "Bebidas"
+        ],
+        "summary": "Busca todos os drinks em um categoria especifica",
+        "description": "# Obter Categoria de Bebida por ID\n\nEste ponto de extremidade realiza uma solicitação HTTP GET para recuperar os detalhes de uma categoria específica de bebida com base no ID da categoria fornecido.\n\n## Solicitação\n\n- Método: GET\n- URL: `http://localhost:3000/drinks/categories/1`\n    \n\n## Resposta\n\n- Status: 200 OK\n- Corpo:\n    \n\n``` json\n[\n  {\n        \"categoryId\": 1,\n        \"categoryName\": \"Coquetéis\",\n        \"description\": \"O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão\",\n        \"id\": 31,\n        \"name\": \"Martini\",\n        \"price\": 20,\n        \"imageUrl\": \"assets/Cocktail-Martini.png\",\n        \"isLiked\": false\n    }\n]\n\n ```\n\nEste exemplo de resposta parece indicar que houve uma resposta bem-sucedida, mas os detalhes específicos da categoria, como nome, descrição, preço e URL da imagem, não foram preenchidos ou estão com valores padrão. Certifique-se de que o servidor forneça informações detalhadas sobre a categoria com base no ID fornecido.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "2716"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"a9c-B5rxu00fEAbanpHFarnnEQ4joKg\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:22:37 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Martini é um coquetel clássico que pode ser feito com gin ou vodka e vermute. É geralmente servido com uma azeitona ou uma casca de limão",
+                    "id": 31,
+                    "name": "Martini",
+                    "price": 20,
+                    "imageUrl": "assets/Cocktail-Martini.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Margarita é uma bebida mexicana feita com tequila, licor de laranja e suco de limão. É muitas vezes servida com uma borda de sal",
+                    "id": 32,
+                    "name": "Margarita",
+                    "price": 15,
+                    "imageUrl": "assets/Cocktail-marguerita.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Mojito é um coquetel cubano feito com rum, açúcar, suco de limão, água com gás e hortelã",
+                    "id": 33,
+                    "name": "Mojito",
+                    "price": 12,
+                    "imageUrl": "assets/Cocktail-mojito.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Old Fashioned é um coquetel clássico feito com bourbon ou uísque, açúcar, angostura bitters e uma casca de laranja",
+                    "id": 34,
+                    "name": "Old Fashioned",
+                    "price": 25,
+                    "imageUrl": "assets/Cocktail-WhiskySour.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Negroni é um coquetel italiano feito com gin, vermute tinto e Campari. É geralmente guarnecido com uma fatia de laranja",
+                    "id": 35,
+                    "name": "Negroni",
+                    "price": 30,
+                    "imageUrl": "assets/Cocktail-Negroni.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Cosmopolitan é um coquetel americano feito com vodka, licor de laranja, suco de cranberry e suco de limão",
+                    "id": 36,
+                    "name": "Cosmopolitan",
+                    "price": 20,
+                    "imageUrl": "assets/Coktail-Cosmopolitano.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Piña Colada é uma bebida tropical feita com rum, leite de coco e suco de abacaxi",
+                    "id": 37,
+                    "name": "Piña Colada",
+                    "price": 18,
+                    "imageUrl": "assets/Cocktail-PinaCollada.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "Um coquetel americano feito com vodka, suco de tomate, Tabasco, suco de limão, sal, molho Worcestershire, aipo e limão",
+                    "id": 38,
+                    "name": "Bloody Mary",
+                    "price": 25,
+                    "imageUrl": "assets/Coktail-BloodyMary.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "A Caipirinha é a bebida nacional do Brasil, feita com cachaça, açúcar e limã",
+                    "id": 39,
+                    "name": "Caipirinha",
+                    "price": 8,
+                    "imageUrl": "assets/Coktail-Caipirinha.png",
+                    "isLiked": false
+                  },
+                  {
+                    "categoryId": 1,
+                    "categoryName": "Coquetéis",
+                    "description": "O Daiquiri é um coquetel cubano feito com rum, suco de limão e xarope simples. É muitas vezes servido frozen",
+                    "id": 40,
+                    "name": "Daiquiri",
+                    "price": 18,
+                    "imageUrl": "assets/Cocktail-Daiquiri.png",
+                    "isLiked": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drinks/6/like": {
+      "patch": {
+        "tags": [
+          "Bebidas"
+        ],
+        "summary": "Favoritar Drinks",
+        "description": "Está rota é usada para favoritar/desfavoritar um drink, funciona de maneira 'toggle' dessa forma quando não esta favoritado ele passa a ser favoritado, e o contrario quando está favoritado",
+        "requestBody": {
+          "content": {}
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:27:07 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Favorita Drink 5",
+                    "value": null
+                  },
+                  "example-1": {
+                    "summary": "Favorita Drink 6",
+                    "value": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Login",
+        "description": "## Auth Login\n\nEste endpoint é usado para autenticar um usuário, fornecendo seu email e senha.\n\n### Request Body\n\n- `email` (string, obrigatorio)\n    \n- `password` (string, required)\n    \n\n### Response\n\n- `token` (string): Um token JWT para o usuário autenticado.\n    \n- `error` (string): Se a solicitação falhar, uma mensagem de erro será fornecida.\n    \n\n#### Example Response\n\n``` json\n{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n    \"error\": \"\"\n}\n\n ```",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jhondoe_novo@gmail.com",
+                  "password": "1234aRaa"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "245"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"f5-Y1sNkQjMmQDLkES0uvVGTGoVKjU\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:56:48 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiaXJ0aGRheSI6IjIwMDAtMTEtMjlUMDA6MDA6MDAuMDAwWiIsImVtYWlsIjoiamhvbmRvZV9ub3ZvQGdtYWlsLmNvbSIsImlkIjo5LCJuYW1lIjoiSmhvbiBEb2UiLCJpYXQiOjE3MDU0MTcwMDh9.Mh9UNzFVqk5WTG7ymmkSAHs1VVM5G2yfFYlGQIG-mNs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "46"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"2e-rWMmBHQ4KBXTeyxBoWA+o0HbBhE\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:59:02 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Validação Campo Invalido",
+                    "value": {
+                      "error": "The property \"email\" is not in the correct format (expected: /^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/)"
+                    }
+                  },
+                  "example-1": {
+                    "summary": "Validação Campo Não Informado",
+                    "value": {
+                      "error": "The property \"email\" is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "26"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"1a-7GHLk3sEqhb7bdUzDAkTbp8LZZ8\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:57:05 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "error": "Wrong password"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Healthcheck"
+        ],
+        "summary": "Healtcheck - Padrão",
+        "description": "Este endpoint faz uma solicitação HTTP GET para [http://localhost:3000/](http://localhost:3000/). Não requer nenhum corpo de solicitação\n\n### Resposta\n\n- Status: 200\n- Body:\n    \n    ``` json\n        {\n            \"status\": \"\",\n            \"alive\": true,\n            \"uptime\": 0\n        }\n    \n     ```",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "49"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"31-KjppXsl+3GYTAcwFIakbOxi7/q4\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:01:52 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "ok",
+                  "alive": true,
+                  "uptime": 7.643188919
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Healthcheck"
+        ],
+        "summary": "Is Alive",
+        "description": "Verifica se Api esta ativa usando um verbo HEAD\n\nO que permite uma chamada http rapida apenas para verificar se a api esta ativa",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "50"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"32-ppKRHiFHLzY/vaHJ27lpgZB1PME\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:06:55 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "tags": [
+          "Healthcheck"
+        ],
+        "summary": "Healtcheck - Ping -> Pong",
+        "description": "# Ping Endpoint\n\nEste endpoint envia uma solicitação HTTP GET para [http://localhost:3000/ping](http://localhost:3000/ping) para verificar o status do servidor.\n\n### Response\n\npong html indicando que o servidor esta ativo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "text/html; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "4"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"4-DlFKBmK8tp3IY5U9HOJuPUDoGoc\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:03:27 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "pong"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drinks-categories": {
+      "get": {
+        "tags": [
+          "Categoria de Bebidas"
+        ],
+        "summary": "Lista Categorias de Drinks",
+        "description": "## Obter Categorias de Bebidas\n\n---\n\n  \nEste ponto de extremidade obtém uma lista de categorias de bebidas. A solicitação deve ser feita como um GET HTTP para [http://localhost:3000/drinks/categories](http://localhost:3000/drinks/categories).\n\n## Resposta:\n\n---\n\n  \nAo obter com sucesso a lista de categorias de bebidas, o servidor responde com um código de status 200 e um array JSON contendo as informações das categorias:\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"name\": \"Coquetéis\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Cervejas Industrializadas\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Cervejas Artesanais\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Vinhos\"\n    }\n]\n\n ```\n\nCada objeto na lista possui um id único e o nome da categoria.\n\nEm caso de erro, o servidor responderá com um código de status de erro apropriado, juntamente com uma mensagem de erro.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "137"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"89-KKwQn1WSCuTqI6rvNfEsZ4avBes\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:09:14 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Coquetéis"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Cervejas Industrializadas"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Cervejas Artesanais"
+                  },
+                  {
+                    "id": 4,
+                    "name": "Vinhos"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Cria usuarios",
+        "description": "Este endpoint o cliente crie um novo usuário. A solicitação deve ser enviada como um POST HTTP para [http://localhost:3000/users](http://localhost:3000/users) com as informações necessárias do usuário no corpo da solicitação.\n\nCorpo da Solicitação:\n\n- name (string, obrigatório): O nome do usuário.\n    \n- password (string, obrigatório): A senha para a conta do usuário.\n    \n- email (string, obrigatório): O endereço de e-mail do usuário.\n    \n- birthday (string, obrigatório): A data de nascimento do usuário.\n    \n\nResposta:  \n  \n  \nApós a criação bem-sucedida do usuário, o servidor responde com um código de status 201 e um objeto JSON contendo as informações do usuário recém-criado:\n\n``` json\n{\n    \"user\": {\n        \"email\": \"jhondoe_novo@gmail.com\",\n        \"id\": 9\n    }\n}\n\n ```\n\nO id é o identificador único para o usuário, e o email é o endereço de e-mail associado à conta do usuário.  \nEm caso de erro, o servidor responderá com um código de status de erro apropriado, juntamente com uma mensagem de erro.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Jhon Doe",
+                  "password": "1234aRaa",
+                  "email": "jhondoe_novo@gmail.com",
+                  "birthday": "2000-11-29"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "50"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"32-WeJNCciKvtQD0i1qwsn7Vc6Qesw\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:47:45 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "user": {
+                    "email": "jhondoe_novo@gmail.com",
+                    "id": 9
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "113"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"71-1t3DRiNFol4gEFjAKIjhqtWu4j0\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:40:52 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Validação de Campo",
+                    "value": {
+                      "error": "The property \"email\" is not in the correct format (expected: /^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/)"
+                    }
+                  },
+                  "example-1": {
+                    "summary": "Validação de Campo Ausente",
+                    "value": {
+                      "error": "The property \"email\" is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "33"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"21-iGErLku/9taeeOQN+9qwFgLXnuo\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 14:40:26 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User already exists"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/liked-drinks": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Bebidas Favoritadas",
+        "description": "Este ponto de extremidade realiza uma solicitação HTTP GET para recuperar uma lista de bebidas curtidas pelo usuário. A resposta incluirá um array de objetos, onde cada objeto representa uma bebida curtida, com detalhes como ID da categoria, nome da categoria, descrição, ID, URL da imagem, nome, preço e um sinal booleano indicando se a bebida é curtida ou não.\n\nExemplo de resposta:\n\n``` json\n[\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.\",\n        \"id\": 5,\n        \"imageUrl\": \"assets/Vinho-Chateau-Garrus.png\",\n        \"name\": \"Château d'Esclans Garrus Rosé\",\n        \"price\": 300,\n        \"isLiked\": true\n    },\n    {\n        \"categoryId\": 4,\n        \"categoryName\": \"Vinhos\",\n        \"description\": \"Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.\",\n        \"id\": 6,\n        \"imageUrl\": \"assets/Vinho-Porto-Vintage.png\",\n        \"name\": \"Porto Vintage\",\n        \"price\": 250,\n        \"isLiked\": true\n    }\n]\n\n ```",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string",
+                  "example": "Express"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json; charset=utf-8"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "2"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 16 Jan 2024 15:07:14 GMT"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Sem Itens",
+                    "value": []
+                  },
+                  "example-1": {
+                    "summary": "Com Itens",
+                    "value": [
+                      {
+                        "categoryId": 4,
+                        "categoryName": "Vinhos",
+                        "description": "Rosé da região da Provence, Château d'Esclans Garrus é conhecido por ser um dos rosés mais premium do mundo. É elaborado com cuidado e é apreciado por sua complexidade, estrutura e finesse.",
+                        "id": 5,
+                        "imageUrl": "assets/Vinho-Chateau-Garrus.png",
+                        "name": "Château d'Esclans Garrus Rosé",
+                        "price": 300,
+                        "isLiked": true
+                      },
+                      {
+                        "categoryId": 4,
+                        "categoryName": "Vinhos",
+                        "description": "Um vinho fortificado originário da região do Porto, em Portugal. Porto Vintage é produzido em anos excepcionais e é caracterizado por ser encorpado, frutado e ter grande potencial de envelhecimento.",
+                        "id": 6,
+                        "imageUrl": "assets/Vinho-Porto-Vintage.png",
+                        "name": "Porto Vintage",
+                        "price": 250,
+                        "isLiked": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
