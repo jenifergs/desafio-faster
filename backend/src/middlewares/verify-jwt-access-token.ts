@@ -4,7 +4,7 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import { jwtService } from '../shared/instances';
+import { jwtService } from '../utils/instances';
 
 /**
  * @function verifyJwtAccessToken

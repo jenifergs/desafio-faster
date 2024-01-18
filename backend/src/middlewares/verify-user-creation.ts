@@ -3,7 +3,7 @@
  */
 
 import { NextFunction, Request, Response } from 'express';
-import { verifyExistenceAndFormat } from '../shared/verify-existence-and-format.middleware';
+import { verifyExistenceAndFormat } from '../utils/verify-existence-and-format.middleware';
 /**
  * @function verifyUserCreation
  * @description Middleware responsavel por verificar se os parametros de criação de usuário são válidos. Ou seja, se o email, nome, senha e data de nascimento estão no formato correto.

@@ -3,7 +3,7 @@
  */
 
 import { NextFunction, Request, Response } from 'express';
-import { verifyExistenceAndFormat } from '../shared/verify-existence-and-format.middleware';
+import { verifyExistenceAndFormat } from '../utils/verify-existence-and-format.middleware';
 
 /**
  * @function verifyLogin
