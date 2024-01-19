@@ -1,0 +1,26 @@
+:root {
+  --primary-color: #FAB330;
+  --secondary-color: #2B1B10;
+  --tertiary-color: #D6B87E;
+  --soft-light-color: #FFFFFF;
+  --gray-color: #6d6c6c;
+  --dark-color: #4d4d4d;
+}
+
+
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+p div section button {
+  font-family: 'Lora', serif;
+}
