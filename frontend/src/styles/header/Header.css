@@ -1,0 +1,26 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding-inline: 60px;
+}
+
+.logo-header {
+  width: 90px;
+}
+
+.header ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.header ul li {
+  margin-right: 20px;
+}
+
+.header ul li a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-size: 20px;
+}
