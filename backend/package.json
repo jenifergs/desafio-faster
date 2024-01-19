@@ -10,6 +10,7 @@
     "build": "tsc",
     "docker:dev": "docker compose up -d --build",
     "docker:bash": "docker exec -it backend_dev bash",
+    "project:first-setup": "rm -rf node_modules && npm install && npm run db:push && npm run db:generate && npm run db:seed",
     "db:pull": "npx prisma db pull",
     "db:update": "prisma db update",
     "db:push": "npx prisma db push",
