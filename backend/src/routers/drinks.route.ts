@@ -11,19 +11,19 @@ export const drinksRouter = new Routers(
   drinksController,
 ).setupRoutes((router, controller) => {
   router
-    .get('/', verifyJwtAccessToken, (req, res) =>
+    .get('/', verifyJwtAccessToken, async (req, res) =>
       controller.getAllDrinks(req, res),
     )
-    .get('/search', verifyJwtAccessToken, (req, res) =>
+    .get('/search', verifyJwtAccessToken, async (req, res) =>
       controller.searchDrinksByName(req, res),
     )
-    .get('/categories/:categoryId', verifyJwtAccessToken, (req, res) =>
+    .get('/categories/:categoryId', verifyJwtAccessToken, async (req, res) =>
       controller.getDrinksByCategory(req, res),
     )
-    .get('/categories/:categoryId/search', verifyJwtAccessToken, (req, res) =>
+    .get('/categories/:categoryId/search', verifyJwtAccessToken, async (req, res) =>
       controller.getDrinksByCategoryAndName(req, res),
     )
-    .patch('/:id/like', verifyJwtAccessToken, (req, res) =>
+    .patch('/:id/like', verifyJwtAccessToken, async (req, res) =>
       controller.toggleDrinkLike(req, res),
     );
 });

@@ -7,7 +7,7 @@ import { verifyLogin } from '../middlewares/verify-login';
 
 export const authRouter = new Routers('/auth', authController).setupRoutes(
   (router, controller) => {
-    router.post('/login', verifyLogin, (req, res) =>
+    router.post('/login', verifyLogin, async (req, res) =>
       controller.login(req, res),
     );
   },

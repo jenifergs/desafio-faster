@@ -8,5 +8,5 @@ export const drinksCategoriesRouter = new Routers(
   '/drinks-categories',
   drinkCategoriesController,
 ).setupRoutes((router, controller) => {
-  router.get('/', (req, res) => controller.getDrinkCategories(req, res));
+  router.get('/', async (req, res) => controller.getDrinkCategories(req, res));
 });

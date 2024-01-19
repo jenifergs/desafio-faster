@@ -12,8 +12,8 @@ import { verifyJwtAccessToken } from '../middlewares/verify-jwt-access-token';
 export const usersRouter = new Routers('/users', userController).setupRoutes(
   (router: Router, controller: UserController) => {
     router
-      .post('/', verifyUserCreation, (req, res) => controller.create(req, res))
-      .get('/liked-drinks', verifyJwtAccessToken, (req, res) =>
+      .post('/', verifyUserCreation, async (req, res) => controller.create(req, res))
+      .get('/liked-drinks', verifyJwtAccessToken, async (req, res) =>
         controller.getLikedDrinks(req, res),
       );
   },
