@@ -17,12 +17,10 @@ export const verifyUserCreation = async (
   next: NextFunction,
 ) => {
   const emailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const nameRegEx = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   const birthdayRegEx = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
   const validators = [
     verifyExistenceAndFormat(req, res, 'email', emailRegEx),
-    verifyExistenceAndFormat(req, res, 'name', nameRegEx),
     verifyExistenceAndFormat(req, res, 'password', passwordRegEx),
     verifyExistenceAndFormat(req, res, 'birthday', birthdayRegEx),
   ];
