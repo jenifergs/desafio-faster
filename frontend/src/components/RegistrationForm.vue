@@ -46,7 +46,8 @@ export default defineComponent({
   methods: {
     async register() {
       console.log('Registro realizado com sucesso!')
-      const result = await this.service.createUser({
+      try {
+        const result = await this.service.createUser({
         name: this.name,
         email: this.email,
         password: this.password,
@@ -55,6 +56,9 @@ export default defineComponent({
       if (result.user.id) {
         alert('Usuário criado com sucesso!')
         this.$router.push('/login')
+      }
+      } catch (error) {
+        alert('Erro ao criar usuário')
       }
     },
   },

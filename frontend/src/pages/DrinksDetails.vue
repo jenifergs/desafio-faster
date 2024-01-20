@@ -28,6 +28,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+const token = localStorage.getItem('token')
 export default defineComponent({
   asyncData({ query }) {
     const drink = JSON.parse(query.drink as any)
@@ -47,6 +48,11 @@ export default defineComponent({
         this.quantity--
       }
     },
+    async mounted() {
+      if (token === null) {
+        this.$router.push('/login')
+      }
+  },
   },
 })
 </script>

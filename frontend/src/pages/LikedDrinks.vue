@@ -36,6 +36,9 @@ export default defineComponent({
     },
   },
   async mounted() {
+    if (token === null) {
+      this.$router.push('/login')
+    }
     await this.getDrinks()
   },
 })

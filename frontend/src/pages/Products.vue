@@ -64,22 +64,29 @@ export default defineComponent({
       this.drinkCategories = categories
     },
     async search() {
-      if (this.selectedCategory && this.searchName) {
-        const drinks = await this.drinksService.searchDrinksInCategory(
-          this.selectedCategory,
-          this.searchName
-        )
-        this.drinks = drinks
-      } else if (this.selectedCategory) {
-        const drinks = await this.drinksService.getDrinksInCategory(
-          this.selectedCategory
-        )
-        this.drinks = drinks
-      } else if (this.searchName) {
-        const drinks = await this.drinksService.searchDrinks(this.searchName)
-        this.drinks = drinks
-      } else {
-        this.getDrinks()
+      try {
+        if (this.selectedCategory && this.searchName) {
+          const drinks = await this.drinksService.searchDrinksInCategory(
+            this.selectedCategory,
+            this.searchName
+          )
+          this.drinks = drinks
+        } else if (this.selectedCategory) {
+          const drinks = await this.drinksService.getDrinksInCategory(
+            this.selectedCategory
+          )
+          this.drinks = drinks
+        } else if (this.searchName) {
+          const drinks = await this.drinksService.searchDrinks(this.searchName)
+          this.drinks = drinks
+        } else {
+          this.getDrinks()
+        }
+      } catch (error) {
+        alert('Erro ao carregar produtos')
+        if (token === null) {
+          this.$router.push('/login')
+        }
       }
     },
     updateDrink(updatedDrink) {
@@ -87,8 +94,15 @@ export default defineComponent({
     },
   },
   async mounted() {
-    await this.getDrinks()
-    await this.getDrinkCategories()
+    try {
+      await this.getDrinks()
+      await this.getDrinkCategories()
+    } catch (error) {
+      alert('Erro ao carregar produtos')
+      if (token === null) {
+        this.$router.push('/login')
+      }
+    }
   },
 })
 </script>
