@@ -19,6 +19,7 @@
         </div>
         <button class="btn-cart">Adicionar ao Carrinho</button>
       </div>
+      <br>
     </div>
     <p class="drink-details-description">{{ drink.description }}</p>
   </div>
