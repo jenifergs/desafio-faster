@@ -9,6 +9,7 @@
   border-radius: 10px;
   text-align: center;
   padding: 30px;
+  justify-content: space-around;
 }
 
 .drink-details h2 {
