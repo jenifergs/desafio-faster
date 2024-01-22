@@ -45,7 +45,6 @@ export default defineComponent({
   },
   methods: {
     async register() {
-      console.log('Registro realizado com sucesso!')
       try {
         const result = await this.service.createUser({
         name: this.name,

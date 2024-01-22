@@ -55,7 +55,6 @@ export default defineComponent({
   },
   methods: {
     async getDrinks() {
-      console.log(this.drinksService)
       const drinks = await this.drinksService.getDrinks()
       this.drinks = drinks
     },
@@ -90,7 +89,7 @@ export default defineComponent({
       }
     },
     updateDrink(updatedDrink) {
-      console.log('updateDrink', updatedDrink)
+      return;
     },
   },
   async mounted() {
